@@ -12,7 +12,7 @@ const fs   = require('fs');
 const path = require('path');
 
 // Carrega o módulo ws incluído no projeto
-const { WebSocketServer } = require('./node_modules/ws');
+const { WebSocketServer } = require('ws');
 
 // ── Salas ──────────────────────────────────────────────────────
 // Map<roomId, { p1: ws|null, p2: ws|null, public: bool }>
