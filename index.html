@@ -12,13 +12,11 @@
 </head>
 <body>
 
-<!-- PARTÍCULAS DO LOBBY -->
 <canvas id="lobby-particles"></canvas>
 
-<!-- ===== LOBBY ===== -->
+<!-- LOBBY -->
 <div id="lobby-screen" class="screen active">
   <div class="lobby-content">
-
     <div class="logo-wrap">
       <div class="logo-sub">⚡ WEB FIGHTER 2025 ⚡</div>
       <h1 class="logo">KOMBAT<span class="logo-dot">.</span>IO</h1>
@@ -33,6 +31,7 @@
       <button class="btn btn-primary glow-red"   id="btn-quick-match">⚡ PARTIDA RÁPIDA</button>
       <button class="btn btn-secondary glow-blue" id="btn-create-room">🏠 CRIAR SALA</button>
       <button class="btn btn-ghost"               id="btn-join-room">🔗 ENTRAR COM CÓDIGO</button>
+      <button class="btn btn-bot"                 id="btn-vs-bot">🤖 JOGAR VS BOT</button>
     </div>
 
     <div id="join-panel" style="display:none" class="join-panel">
@@ -59,11 +58,12 @@
         <div class="ctrl-keys"><kbd>,</kbd> Soco &nbsp; <kbd>.</kbd> Chute</div>
       </div>
     </div>
-    <div class="mobile-hint">📱 No celular os controles aparecem automaticamente</div>
+    <div class="stamina-hint">⚡ Ataques gastam STAMINA — aguarde recarregar!</div>
+    <div class="mobile-hint">📱 No celular os controles aparecem na tela durante o jogo</div>
   </div>
 </div>
 
-<!-- ===== AGUARDANDO ===== -->
+<!-- AGUARDANDO -->
 <div id="waiting-screen" class="screen">
   <div class="waiting-box">
     <div class="waiting-ring"></div>
@@ -75,7 +75,7 @@
   </div>
 </div>
 
-<!-- ===== JOGO ===== -->
+<!-- JOGO -->
 <div id="game-screen" class="screen">
   <div class="hud">
     <!-- P1 -->
@@ -88,12 +88,21 @@
         </div>
         <span class="hud-hp" id="hp-p1">100</span>
       </div>
+      <!-- Stamina P1 -->
+      <div class="hud-st-wrap">
+        <span class="hud-st-label">ST</span>
+        <div class="hud-st-track">
+          <div class="hud-st-bar" id="st-bar-p1"></div>
+        </div>
+      </div>
     </div>
+
     <!-- Centro -->
     <div class="hud-center">
       <div class="hud-timer" id="game-timer">99</div>
       <div class="hud-round-lbl">ROUND 1</div>
     </div>
+
     <!-- P2 -->
     <div class="hud-side hud-p2-side">
       <div class="hud-name p2-color">PLAYER 2</div>
@@ -103,6 +112,13 @@
           <div class="hud-bar-shine"></div>
         </div>
         <span class="hud-hp" id="hp-p2">100</span>
+      </div>
+      <!-- Stamina P2 -->
+      <div class="hud-st-wrap reverse">
+        <span class="hud-st-label">ST</span>
+        <div class="hud-st-track">
+          <div class="hud-st-bar hud-st-bar-p2" id="st-bar-p2"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -119,9 +135,7 @@
   <div id="mobile-controls" class="mctrl" style="display:none">
     <div class="mctrl-left">
       <div class="mctrl-dpad">
-        <div class="dpad-row">
-          <button class="mbtn mBtn-up" id="mb-up">▲</button>
-        </div>
+        <div class="dpad-row"><button class="mBtn mBtn-up" id="mb-up">▲</button></div>
         <div class="dpad-row">
           <button class="mBtn mBtn-dir" id="mb-left">◀</button>
           <div class="dpad-center"></div>
@@ -142,7 +156,7 @@
   </div>
 </div>
 
-<!-- ===== RESULTADO ===== -->
+<!-- RESULTADO -->
 <div id="result-screen" class="screen">
   <div class="result-wrap">
     <div id="result-label" class="result-label">VITÓRIA!</div>
