@@ -746,11 +746,7 @@ function connectAndDo(action,data) {
     socket.onclose=null; socket.onerror=null; socket.onmessage=null;
     socket.close();
   }
-  var proto=location.protocol==='https:'?'wss':'ws';
-  var host=location.hostname||'127.0.0.1';
-  var port=location.port||'3000';
-  setStatus('Conectando...');
-  try { socket=new WebSocket(proto+'://'+host+':'+port); }
+  var url = 'wss://kombat-io.onrender.com';
   catch(e){ setStatus('❌ Erro: '+e.message); return; }
   socket.onopen=function(){
     var msg={type:action};
