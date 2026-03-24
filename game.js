@@ -746,8 +746,9 @@ function connectAndDo(action,data) {
     socket.onclose=null; socket.onerror=null; socket.onmessage=null;
     socket.close();
   }
-  var url = 'wss://kombat-io.onrender.com';
-  catch(e){ setStatus('❌ Erro: '+e.message); return; }
+ var url = 'wss://kombat-io.onrender.com';
+try { socket = new WebSocket(url); }
+catch(e){ setStatus('❌ Erro: '+e.message); return; }
   socket.onopen=function(){
     var msg={type:action};
     if(data) for(var k in data) msg[k]=data[k];
