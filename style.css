@@ -375,3 +375,54 @@ kbd {
 @media (min-width:481px) {
   .mobile-hint { display:none; }
 }
+
+/* ── BOT BUTTON ── */
+.btn-bot {
+  background:linear-gradient(135deg,#1a0a30,#2a1050);
+  color:#bb88ff; border-color:#8844cc;
+  box-shadow:0 0 16px rgba(150,80,255,.4);
+}
+.btn-bot:hover { box-shadow:0 0 26px rgba(150,80,255,.7); color:#dd99ff; }
+
+/* ── STAMINA HUD ── */
+.hud-st-wrap {
+  display:flex; align-items:center; gap:4px; margin-top:2px;
+}
+.hud-st-wrap.reverse { flex-direction:row-reverse; }
+.hud-st-label {
+  font-family:var(--pixel); font-size:5px; color:rgba(255,255,255,.4);
+  min-width:10px;
+}
+.hud-st-track {
+  flex:1; height:5px;
+  background:rgba(0,0,0,.5);
+  border:1px solid rgba(255,255,255,.08);
+  overflow:hidden;
+}
+.hud-st-bar {
+  height:100%; width:100%;
+  background:linear-gradient(90deg,#00cc66,#00ff88);
+  transition:width .1s ease-out;
+  box-shadow:0 0 4px rgba(0,255,136,.6);
+}
+.hud-st-bar-p2 {
+  background:linear-gradient(90deg,#00cc66,#00ff88);
+}
+
+/* ── DICAS ── */
+.stamina-hint {
+  font-family:var(--pixel); font-size:7px;
+  color:rgba(0,255,136,.6); text-align:center;
+}
+
+/* ── CANVAS WRAP FIX MOBILE ── */
+.canvas-wrap {
+  position:relative; flex:1; min-height:0;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+#game-canvas {
+  display:block;
+  max-width:100%; max-height:100%;
+  image-rendering:pixelated;
+}
