@@ -1,0 +1,55 @@
+======================================================
+  KOMBAT.IO - Como jogar
+======================================================
+
+O ERRO "Verifique se o servidor está rodando" acontece
+porque você abriu o index.html diretamente no navegador.
+Isso NAO funciona! Precisa rodar o servidor primeiro.
+
+------------------------------------------------------
+PASSO 1 - Instalar Node.js (só precisa fazer 1 vez)
+------------------------------------------------------
+1. Acesse: https://nodejs.org
+2. Baixe a versão "LTS" (botão verde grande)
+3. Instale normalmente (Next, Next, Finish)
+4. Reinicie o computador
+
+------------------------------------------------------
+PASSO 2 - Iniciar o servidor
+------------------------------------------------------
+JEITO FÁCIL:
+  Clique duas vezes no arquivo: INICIAR.bat
+  (ele abre o navegador automaticamente)
+
+JEITO MANUAL:
+  1. Abra o CMD ou PowerShell nesta pasta
+      (Segure Shift + clique direito na pasta → "Abrir janela PowerShell aqui")
+  2. Digite:  node server.js
+  3. Você verá: "KOMBAT.IO rodando! Abra: http://localhost:3000"
+
+------------------------------------------------------
+PASSO 3 - Jogar
+------------------------------------------------------
+Abra no navegador: http://localhost:3000
+
+NAO abra o index.html diretamente! Use o endereço acima.
+
+------------------------------------------------------
+JOGAR COM AMIGO
+------------------------------------------------------
+Na MESMA máquina (2 abas):
+  Aba 1: http://localhost:3000  → CRIAR SALA → anote o código
+  Aba 2: http://localhost:3000  → ENTRAR COM CÓDIGO → cole o código
+
+Com amigo em OUTRA máquina na mesma rede Wi-Fi:
+  Você:    http://localhost:3000      → CRIAR SALA
+  Amigo:   http://SEU_IP:3000        → ENTRAR COM CÓDIGO
+  (Para ver seu IP: abra CMD e digite "ipconfig", veja o IPv4)
+
+------------------------------------------------------
+CONTROLES
+------------------------------------------------------
+  Player 1: A/D = mover, W = pular, F = soco, G = chute
+  Player 2: Setas = mover, Seta cima = pular, , = soco, . = chute
+
+======================================================

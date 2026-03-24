@@ -1,0 +1,10 @@
+{
+  "name": "kombat-io",
+  "version": "3.0.0",
+  "description": "Jogo de luta 2D multiplayer — inclui o módulo ws, sem npm install necessário",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": { "node": ">=18.0.0" }
+}

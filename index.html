@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <title>KOMBAT.IO — Multiplayer Fighter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@500;700&display=swap"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- PARTÍCULAS DO LOBBY -->
+<canvas id="lobby-particles"></canvas>
+
+<!-- ===== LOBBY ===== -->
+<div id="lobby-screen" class="screen active">
+  <div class="lobby-content">
+
+    <div class="logo-wrap">
+      <div class="logo-sub">⚡ WEB FIGHTER 2025 ⚡</div>
+      <h1 class="logo">KOMBAT<span class="logo-dot">.</span>IO</h1>
+      <div class="logo-tagline">MULTIPLAYER ONLINE</div>
+    </div>
+
+    <div class="fighters-preview">
+      <canvas id="preview-canvas" width="320" height="120"></canvas>
+    </div>
+
+    <div class="menu-panel">
+      <button class="btn btn-primary glow-red"   id="btn-quick-match">⚡ PARTIDA RÁPIDA</button>
+      <button class="btn btn-secondary glow-blue" id="btn-create-room">🏠 CRIAR SALA</button>
+      <button class="btn btn-ghost"               id="btn-join-room">🔗 ENTRAR COM CÓDIGO</button>
+    </div>
+
+    <div id="join-panel" style="display:none" class="join-panel">
+      <input id="room-code-input" type="text" placeholder="CÓDIGO" maxlength="4"
+             autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false"/>
+      <div class="join-row">
+        <button class="btn btn-accent" id="btn-confirm-join">ENTRAR</button>
+        <button class="btn btn-ghost btn-sm" id="btn-cancel-join">✕</button>
+      </div>
+    </div>
+
+    <div id="lobby-status" class="lobby-status"></div>
+
+    <div class="controls-wrap">
+      <div class="ctrl-block">
+        <div class="ctrl-player p1-color">P1</div>
+        <div class="ctrl-keys"><kbd>A</kbd><kbd>D</kbd> Mover &nbsp; <kbd>W</kbd> Pular</div>
+        <div class="ctrl-keys"><kbd>F</kbd> Soco &nbsp; <kbd>G</kbd> Chute</div>
+      </div>
+      <div class="ctrl-vs">VS</div>
+      <div class="ctrl-block">
+        <div class="ctrl-player p2-color">P2</div>
+        <div class="ctrl-keys"><kbd>←</kbd><kbd>→</kbd> Mover &nbsp; <kbd>↑</kbd> Pular</div>
+        <div class="ctrl-keys"><kbd>,</kbd> Soco &nbsp; <kbd>.</kbd> Chute</div>
+      </div>
+    </div>
+    <div class="mobile-hint">📱 No celular os controles aparecem automaticamente</div>
+  </div>
+</div>
+
+<!-- ===== AGUARDANDO ===== -->
+<div id="waiting-screen" class="screen">
+  <div class="waiting-box">
+    <div class="waiting-ring"></div>
+    <div class="waiting-text">AGUARDANDO OPONENTE</div>
+    <div class="waiting-code-label">Código da sala</div>
+    <div id="room-code-display" class="waiting-code">----</div>
+    <div class="waiting-hint">Mande este código para seu amigo!</div>
+    <button class="btn btn-ghost btn-sm" id="btn-cancel-wait">CANCELAR</button>
+  </div>
+</div>
+
+<!-- ===== JOGO ===== -->
+<div id="game-screen" class="screen">
+  <div class="hud">
+    <!-- P1 -->
+    <div class="hud-side hud-p1-side">
+      <div class="hud-name p1-color">PLAYER 1</div>
+      <div class="hud-bar-wrap">
+        <div class="hud-bar-track">
+          <div class="hud-bar hud-bar-p1" id="bar-p1"></div>
+          <div class="hud-bar-shine"></div>
+        </div>
+        <span class="hud-hp" id="hp-p1">100</span>
+      </div>
+    </div>
+    <!-- Centro -->
+    <div class="hud-center">
+      <div class="hud-timer" id="game-timer">99</div>
+      <div class="hud-round-lbl">ROUND 1</div>
+    </div>
+    <!-- P2 -->
+    <div class="hud-side hud-p2-side">
+      <div class="hud-name p2-color">PLAYER 2</div>
+      <div class="hud-bar-wrap reverse">
+        <div class="hud-bar-track">
+          <div class="hud-bar hud-bar-p2" id="bar-p2"></div>
+          <div class="hud-bar-shine"></div>
+        </div>
+        <span class="hud-hp" id="hp-p2">100</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="canvas-wrap">
+    <canvas id="game-canvas"></canvas>
+    <div id="game-overlay" class="game-overlay" style="display:none">
+      <div id="overlay-text" class="overlay-text"></div>
+      <div id="overlay-sub"  class="overlay-sub"></div>
+    </div>
+  </div>
+
+  <!-- CONTROLES MOBILE -->
+  <div id="mobile-controls" class="mctrl" style="display:none">
+    <div class="mctrl-left">
+      <div class="mctrl-dpad">
+        <div class="dpad-row">
+          <button class="mbtn mBtn-up" id="mb-up">▲</button>
+        </div>
+        <div class="dpad-row">
+          <button class="mBtn mBtn-dir" id="mb-left">◀</button>
+          <div class="dpad-center"></div>
+          <button class="mBtn mBtn-dir" id="mb-right">▶</button>
+        </div>
+      </div>
+    </div>
+    <div class="mctrl-right">
+      <button class="mBtn mBtn-punch" id="mb-punch">
+        <span class="mBtn-icon">👊</span>
+        <span class="mBtn-label">SOCO</span>
+      </button>
+      <button class="mBtn mBtn-kick" id="mb-kick">
+        <span class="mBtn-icon">🦵</span>
+        <span class="mBtn-label">CHUTE</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RESULTADO ===== -->
+<div id="result-screen" class="screen">
+  <div class="result-wrap">
+    <div id="result-label" class="result-label">VITÓRIA!</div>
+    <div id="result-name"  class="result-name">PLAYER 1</div>
+    <div class="result-line"></div>
+    <div class="result-btns">
+      <button class="btn btn-primary glow-red"  id="btn-rematch">⚔️ REVANCHE</button>
+      <button class="btn btn-ghost"              id="btn-back-lobby">🏠 LOBBY</button>
+    </div>
+    <div id="result-status" class="result-status"></div>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
